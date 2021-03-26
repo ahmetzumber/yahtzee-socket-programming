@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="jFrame1">
 
@@ -40,6 +40,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Y A H T Z E E"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -57,244 +58,8 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="698" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="fours" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="fivesValue2" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="sixesValue2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="threeKind2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="fourKind2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="full2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="largeS2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="smallS2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="chance2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="yahtzee2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="totalPlayer2" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="sum" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="ones" max="32767" attributes="0"/>
-                              <Component id="twos" alignment="0" max="32767" attributes="0"/>
-                              <Component id="threes" alignment="0" max="32767" attributes="0"/>
-                              <Component id="fives" alignment="1" max="32767" attributes="0"/>
-                              <Component id="Sixes" min="-2" pref="110" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="threeKind" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="Sixes3" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="fourKind" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="largeS" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="fullH" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="smallS" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="total" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="large" min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="largeS3" min="-2" pref="110" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="bonusPlayer2" min="-2" pref="93" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="sumPlayer3" min="-2" pref="94" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="sumPlayer2" min="-2" pref="94" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="twosValue1" min="-2" pref="94" max="-2" attributes="0"/>
-                                                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                                                      <Component id="twosValue2" min="-2" pref="94" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="threesValue1" min="-2" pref="94" max="-2" attributes="0"/>
-                                                          <Component id="foursValue1" min="-2" pref="94" max="-2" attributes="0"/>
-                                                          <Component id="fivesValue1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                                          <Component id="sixesValue1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="foursValue2" min="-2" pref="94" max="-2" attributes="0"/>
-                                                          <Component id="threesValue2" min="-2" pref="94" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="onesValue1" min="-2" pref="94" max="-2" attributes="0"/>
-                                                  <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                                                  <Component id="onesValue2" min="-2" pref="94" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="fourKind1" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="threeKind1" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="full1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="smallS1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="chance1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="largeS1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="yahtzee1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="totalPlayer1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                              <Component id="bonusPlayer1" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ones" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="onesValue1" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="onesValue2" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="twosValue1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="twos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="twosValue2" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="threes" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="threesValue1" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="threesValue2" alignment="1" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="fours" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="foursValue2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="foursValue1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="fives" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="fivesValue2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="fivesValue1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="Sixes" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="sixesValue1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="sixesValue2" min="-2" pref="35" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="sum" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="sumPlayer2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="sumPlayer3" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Sixes3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="bonusPlayer1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="bonusPlayer2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="threeKind" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="threeKind1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="threeKind2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="fourKind1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="fourKind2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="fourKind" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="full1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="fullH" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="full2" alignment="0" min="-2" pref="33" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="smallS1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="smallS2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="smallS" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="largeS2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="largeS1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="large" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="chance1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="chance2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="largeS" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="yahtzee2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="yahtzee1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="largeS3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="totalPlayer2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="totalPlayer1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="total" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="110" max="32767" attributes="0"/>
-          </Group>
-      </Group>
-    </DimensionLayout>
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -304,6 +69,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Player 1"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="848" y="70" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -312,6 +82,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Player 2"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="968" y="70" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="ones">
       <Properties>
@@ -320,6 +95,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ones"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="108" width="110" height="30"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="twos">
       <Properties>
@@ -328,6 +108,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Twos"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="153" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="threes">
       <Properties>
@@ -336,6 +121,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Threes"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="205" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="fours">
       <Properties>
@@ -344,6 +134,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Fours"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="260" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="fives">
       <Properties>
@@ -352,6 +147,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Fives"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="311" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="Sixes">
       <Properties>
@@ -360,41 +160,81 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Sixes"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="362" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="onesValue1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="828" y="108" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="onesValue2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="108" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="foursValue2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="260" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="twosValue1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="828" y="155" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="twosValue2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="153" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="threesValue1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="828" y="205" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="threesValue2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="205" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="fivesValue1">
       <Properties>
@@ -403,21 +243,41 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fivesValue1ActionPerformed"/>
       </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="828" y="311" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="foursValue1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="828" y="260" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="fivesValue2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="311" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="sixesValue2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="362" width="94" height="35"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="sum">
       <Properties>
@@ -426,6 +286,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Sum"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="424" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="threeKind">
       <Properties>
@@ -434,6 +299,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Three of a kind"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="526" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="Sixes3">
       <Properties>
@@ -442,51 +312,101 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Bonus"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="476" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="threeKind1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="528" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="sixesValue1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="828" y="364" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="threeKind2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="528" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="sumPlayer2">
       <Properties>
         <Property name="text" type="java.lang.String" value="sumPlayer2"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="960" y="425" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="totalPlayer2">
       <Properties>
         <Property name="text" type="java.lang.String" value="totalPlayer2"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="895" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="bonusPlayer2">
       <Properties>
         <Property name="text" type="java.lang.String" value="bonusPlayer2"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="959" y="477" width="93" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="bonusPlayer1">
       <Properties>
         <Property name="text" type="java.lang.String" value="bonusPlayer1"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="477" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="fourKind2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="578" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="fourKind1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="578" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="fourKind">
       <Properties>
@@ -495,6 +415,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Four of a kind"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="576" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="largeS">
       <Properties>
@@ -503,36 +428,71 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Chance"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="788" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="full2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="629" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="full1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="631" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="smallS1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="684" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="chance1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="790" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="smallS2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="684" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="largeS2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="737" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="fullH">
       <Properties>
@@ -541,6 +501,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Full House"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="629" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="smallS">
       <Properties>
@@ -549,26 +514,51 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Small straight"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="682" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="chance2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="790" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="largeS1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="737" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="yahtzee2">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="958" y="843" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="yahtzee1">
       <Properties>
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="843" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="large">
       <Properties>
@@ -577,6 +567,11 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Large straight"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="735" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="total">
       <Properties>
@@ -585,16 +580,31 @@
         </Property>
         <Property name="text" type="java.lang.String" value="TOTAL SCORE"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="894" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="sumPlayer3">
       <Properties>
         <Property name="text" type="java.lang.String" value="sumPlayer1"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="424" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="totalPlayer1">
       <Properties>
         <Property name="text" type="java.lang.String" value="totalPlayer1"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="826" y="895" width="94" height="33"/>
+        </Constraint>
+      </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="largeS3">
       <Properties>
@@ -603,6 +613,71 @@
         </Property>
         <Property name="text" type="java.lang.String" value="YAHTZEE"/>
       </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="698" y="841" width="110" height="32"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dice06lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="220" y="590" width="110" height="110"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dice1lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="380" y="120" width="110" height="110"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dice02lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="110" y="210" width="110" height="110"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dice03lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="310" y="290" width="110" height="110"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dice04lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="420" y="450" width="110" height="110"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="dice05lbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="110" y="460" width="110" height="110"/>
+        </Constraint>
+      </Constraints>
     </Component>
   </SubComponents>
 </Form>
