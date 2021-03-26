@@ -1,6 +1,9 @@
 package views;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -10,18 +13,29 @@ import javax.swing.JLabel;
 public class GameScene extends javax.swing.JFrame {
 
     Dices dices = new Dices();
+    ArrayList<JLabel> labels = new ArrayList<>();
+    
     public GameScene() {
         initComponents();
         loadDicePictures();
+        System.out.println(dices.getIcons().size());  
+        labels.add(dice1lbl);
+        labels.add(dice02lbl);
+        labels.add(dice03lbl);
+        labels.add(dice04lbl);
+        labels.add(dice05lbl);
+        labels.add(dice06lbl);
+        System.out.println(labels.size());
     }
+   
 
     public void loadDicePictures() {
-        dice1lbl.setIcon(dices.getDice01Image(dice1lbl.getWidth(), dice1lbl.getHeight()));
-        dice02lbl.setIcon(dices.getDice02Image(dice02lbl.getWidth(), dice02lbl.getHeight()));
-        dice03lbl.setIcon(dices.getDice03Image(dice03lbl.getWidth(), dice03lbl.getHeight()));
-        dice04lbl.setIcon(dices.getDice04Image(dice04lbl.getWidth(), dice04lbl.getHeight()));
-        dice05lbl.setIcon(dices.getDice05Image(dice05lbl.getWidth(), dice05lbl.getHeight()));
-        dice06lbl.setIcon(dices.getDice06Image(dice06lbl.getWidth(), dice06lbl.getHeight()));
+        dice1lbl.setIcon(dices.getDice01Image());
+        dice02lbl.setIcon(dices.getDice02Image());
+        dice03lbl.setIcon(dices.getDice03Image());
+        dice04lbl.setIcon(dices.getDice04Image());
+        dice05lbl.setIcon(dices.getDice05Image());
+        dice06lbl.setIcon(dices.getDice06Image());
     }
 
     @SuppressWarnings("unchecked")
@@ -399,6 +413,7 @@ public class GameScene extends javax.swing.JFrame {
     
     private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
         onesValue1.setEnabled(false);
+
     }//GEN-LAST:event_onesValue1ActionPerformed
 
     private void onesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue2ActionPerformed
@@ -446,7 +461,14 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_sixesValue2ActionPerformed
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
-        
+        // randomizing dices in array
+        ArrayList<ImageIcon> icons = dices.getIcons();
+        // shuffle icons and labels and match them randomly
+        Collections.shuffle(icons);
+        Collections.shuffle(labels);
+        for (int i = 0; i < 5; i++) {
+            labels.get(i).setIcon(icons.get(i));
+        } 
     }//GEN-LAST:event_rollActionPerformed
 
     /**
