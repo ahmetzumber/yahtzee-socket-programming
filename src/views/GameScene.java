@@ -1,22 +1,21 @@
 package views;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Ahmet
  */
 public class GameScene extends javax.swing.JFrame {
-    
-    Dices dices = new Dices();
 
+    Dices dices = new Dices();
     public GameScene() {
         initComponents();
         loadDicePictures();
     }
-    
-    public void loadDicePictures(){
+
+    public void loadDicePictures() {
         dice1lbl.setIcon(dices.getDice01Image(dice1lbl.getWidth(), dice1lbl.getHeight()));
         dice02lbl.setIcon(dices.getDice02Image(dice02lbl.getWidth(), dice02lbl.getHeight()));
         dice03lbl.setIcon(dices.getDice03Image(dice03lbl.getWidth(), dice03lbl.getHeight()));
@@ -24,7 +23,7 @@ public class GameScene extends javax.swing.JFrame {
         dice05lbl.setIcon(dices.getDice05Image(dice05lbl.getWidth(), dice05lbl.getHeight()));
         dice06lbl.setIcon(dices.getDice06Image(dice06lbl.getWidth(), dice06lbl.getHeight()));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -48,7 +47,6 @@ public class GameScene extends javax.swing.JFrame {
         threesValue1 = new javax.swing.JButton();
         threesValue2 = new javax.swing.JButton();
         fivesValue1 = new javax.swing.JButton();
-        foursValue1 = new javax.swing.JButton();
         fivesValue2 = new javax.swing.JButton();
         sixesValue2 = new javax.swing.JButton();
         sum = new javax.swing.JLabel();
@@ -88,6 +86,9 @@ public class GameScene extends javax.swing.JFrame {
         dice03lbl = new javax.swing.JLabel();
         dice04lbl = new javax.swing.JLabel();
         dice05lbl = new javax.swing.JLabel();
+        foursValue1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        roll = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -115,6 +116,10 @@ public class GameScene extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Y A H T Z E E");
+        setBackground(new java.awt.Color(126, 202, 156));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setForeground(new java.awt.Color(126, 202, 156));
+        setPreferredSize(new java.awt.Dimension(1147, 993));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -150,24 +155,59 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(Sixes, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 362, 110, 32));
 
         onesValue1.setText("-");
+        onesValue1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onesValue1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(onesValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 108, 94, 33));
 
         onesValue2.setText("-");
+        onesValue2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onesValue2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(onesValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 108, 94, 33));
 
         foursValue2.setText("-");
+        foursValue2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foursValue2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(foursValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 260, 94, 33));
 
         twosValue1.setText("-");
+        twosValue1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twosValue1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(twosValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 155, 94, 33));
 
         twosValue2.setText("-");
+        twosValue2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twosValue2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(twosValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 153, 94, 33));
 
         threesValue1.setText("-");
+        threesValue1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threesValue1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(threesValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 205, 94, 33));
 
         threesValue2.setText("-");
+        threesValue2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threesValue2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(threesValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 205, 94, 33));
 
         fivesValue1.setText("-");
@@ -176,15 +216,22 @@ public class GameScene extends javax.swing.JFrame {
                 fivesValue1ActionPerformed(evt);
             }
         });
-        getContentPane().add(fivesValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 311, 94, 33));
-
-        foursValue1.setText("-");
-        getContentPane().add(foursValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 260, 94, 33));
+        getContentPane().add(fivesValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 310, 94, 33));
 
         fivesValue2.setText("-");
+        fivesValue2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fivesValue2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(fivesValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 311, 94, 33));
 
         sixesValue2.setText("-");
+        sixesValue2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sixesValue2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(sixesValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 362, 94, 35));
 
         sum.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -203,6 +250,11 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(threeKind1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 528, 94, 33));
 
         sixesValue1.setText("-");
+        sixesValue1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sixesValue1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(sixesValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 364, 94, 33));
 
         threeKind2.setText("-");
@@ -308,17 +360,98 @@ public class GameScene extends javax.swing.JFrame {
         dice05lbl.setText("jLabel1");
         getContentPane().add(dice05lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 110, 110));
 
+        foursValue1.setText("-");
+        foursValue1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foursValue1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(foursValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 260, 94, 33));
+
+        jPanel1.setBackground(new java.awt.Color(220, 220, 220));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 910, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 450, 910));
+
+        roll.setText("ROLL DICES");
+        roll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rollActionPerformed(evt);
+            }
+        });
+        getContentPane().add(roll, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 810, 350, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    
+    private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
+        onesValue1.setEnabled(false);
+    }//GEN-LAST:event_onesValue1ActionPerformed
+
+    private void onesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue2ActionPerformed
+        onesValue2.setEnabled(false);
+    }//GEN-LAST:event_onesValue2ActionPerformed
+
+    private void twosValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twosValue1ActionPerformed
+        twosValue1.setEnabled(false);
+    }//GEN-LAST:event_twosValue1ActionPerformed
+
+    private void twosValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twosValue2ActionPerformed
+        twosValue2.setEnabled(false);
+    }//GEN-LAST:event_twosValue2ActionPerformed
+
+    private void threesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesValue1ActionPerformed
+        threesValue1.setEnabled(false);
+    }//GEN-LAST:event_threesValue1ActionPerformed
+
+    private void threesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesValue2ActionPerformed
+        threesValue2.setEnabled(false);
+    }//GEN-LAST:event_threesValue2ActionPerformed
+
+    private void foursValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursValue1ActionPerformed
+        foursValue1.setEnabled(false);
+    }//GEN-LAST:event_foursValue1ActionPerformed
+
+    private void foursValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursValue2ActionPerformed
+        foursValue2.setEnabled(false);
+    }//GEN-LAST:event_foursValue2ActionPerformed
+
     private void fivesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesValue1ActionPerformed
- 
+        fivesValue1.setEnabled(false);
     }//GEN-LAST:event_fivesValue1ActionPerformed
+
+    private void fivesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesValue2ActionPerformed
+        fivesValue2.setEnabled(false);
+    }//GEN-LAST:event_fivesValue2ActionPerformed
+
+    private void sixesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesValue1ActionPerformed
+        sixesValue1.setEnabled(false);
+    }//GEN-LAST:event_sixesValue1ActionPerformed
+
+    private void sixesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesValue2ActionPerformed
+        sixesValue2.setEnabled(false);
+    }//GEN-LAST:event_sixesValue2ActionPerformed
+
+    private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
+        
+    }//GEN-LAST:event_rollActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -344,10 +477,10 @@ public class GameScene extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-   
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GameScene().setVisible(true);
+                GameScene gs = new GameScene();
+                gs.setVisible(true);
             }
         });
     }
@@ -382,6 +515,7 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel large;
     private javax.swing.JLabel largeS;
     private javax.swing.JButton largeS1;
@@ -390,6 +524,7 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel ones;
     private javax.swing.JButton onesValue1;
     private javax.swing.JButton onesValue2;
+    private javax.swing.JButton roll;
     private javax.swing.JButton sixesValue1;
     private javax.swing.JButton sixesValue2;
     private javax.swing.JLabel smallS;
