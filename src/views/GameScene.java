@@ -3,6 +3,7 @@ package views;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -18,14 +19,11 @@ public class GameScene extends javax.swing.JFrame {
     public GameScene() {
         initComponents();
         loadDicePictures();
-        System.out.println(dices.getIcons().size());  
         labels.add(dice1lbl);
         labels.add(dice02lbl);
         labels.add(dice03lbl);
         labels.add(dice04lbl);
-        labels.add(dice05lbl);
-        labels.add(dice06lbl);
-        System.out.println(labels.size());
+        labels.add(dice05lbl);   
     }
    
 
@@ -35,7 +33,6 @@ public class GameScene extends javax.swing.JFrame {
         dice03lbl.setIcon(dices.getDice03Image());
         dice04lbl.setIcon(dices.getDice04Image());
         dice05lbl.setIcon(dices.getDice05Image());
-        dice06lbl.setIcon(dices.getDice06Image());
     }
 
     @SuppressWarnings("unchecked")
@@ -94,7 +91,6 @@ public class GameScene extends javax.swing.JFrame {
         sumPlayer3 = new javax.swing.JLabel();
         totalPlayer1 = new javax.swing.JLabel();
         largeS3 = new javax.swing.JLabel();
-        dice06lbl = new javax.swing.JLabel();
         dice1lbl = new javax.swing.JLabel();
         dice02lbl = new javax.swing.JLabel();
         dice03lbl = new javax.swing.JLabel();
@@ -103,6 +99,11 @@ public class GameScene extends javax.swing.JFrame {
         foursValue1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         roll = new javax.swing.JButton();
+        h5 = new javax.swing.JButton();
+        h1 = new javax.swing.JButton();
+        h2 = new javax.swing.JButton();
+        h3 = new javax.swing.JButton();
+        h4 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -133,7 +134,7 @@ public class GameScene extends javax.swing.JFrame {
         setBackground(new java.awt.Color(126, 202, 156));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(126, 202, 156));
-        setPreferredSize(new java.awt.Dimension(1147, 993));
+        setPreferredSize(new java.awt.Dimension(1130, 1014));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -356,23 +357,20 @@ public class GameScene extends javax.swing.JFrame {
         largeS3.setText("YAHTZEE");
         getContentPane().add(largeS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 841, 110, 32));
 
-        dice06lbl.setText("jLabel1");
-        getContentPane().add(dice06lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 590, 110, 110));
-
         dice1lbl.setText("jLabel1");
-        getContentPane().add(dice1lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 110, 110));
+        getContentPane().add(dice1lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 110, 110));
 
         dice02lbl.setText("jLabel1");
-        getContentPane().add(dice02lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 110, 110));
+        getContentPane().add(dice02lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 110, 110));
 
         dice03lbl.setText("jLabel1");
-        getContentPane().add(dice03lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 110, 110));
+        getContentPane().add(dice03lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, 110));
 
         dice04lbl.setText("jLabel1");
-        getContentPane().add(dice04lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 450, 110, 110));
+        getContentPane().add(dice04lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 630, 110, 110));
 
         dice05lbl.setText("jLabel1");
-        getContentPane().add(dice05lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 110, 110));
+        getContentPane().add(dice05lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 110, 110));
 
         foursValue1.setText("-");
         foursValue1.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +401,22 @@ public class GameScene extends javax.swing.JFrame {
                 rollActionPerformed(evt);
             }
         });
-        getContentPane().add(roll, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 810, 350, 60));
+        getContentPane().add(roll, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 810, 340, 70));
+
+        h5.setText("H");
+        getContentPane().add(h5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 630, 40, 110));
+
+        h1.setText("H");
+        getContentPane().add(h1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 40, 110));
+
+        h2.setText("H");
+        getContentPane().add(h2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 40, 110));
+
+        h3.setText("H");
+        getContentPane().add(h3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 40, 110));
+
+        h4.setText("H");
+        getContentPane().add(h4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 40, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -461,14 +474,28 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_sixesValue2ActionPerformed
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
+        
+        System.out.println(dice1lbl.getWidth()+" "+dice1lbl.getHeight());
         // randomizing dices in array
         ArrayList<ImageIcon> icons = dices.getIcons();
+        Random rand = new Random();
+        
         // shuffle icons and labels and match them randomly
         Collections.shuffle(icons);
         Collections.shuffle(labels);
+        
+        // every label get random dice
+        int random = 0;
         for (int i = 0; i < 5; i++) {
-            labels.get(i).setIcon(icons.get(i));
-        } 
+            random = rand.nextInt(4);
+            System.out.println(random);
+            labels.get(i).setIcon(icons.get(random));
+        }
+        System.out.println("---------");
+
+        
+         
+        
     }//GEN-LAST:event_rollActionPerformed
 
     /**
@@ -518,7 +545,6 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel dice03lbl;
     private javax.swing.JLabel dice04lbl;
     private javax.swing.JLabel dice05lbl;
-    private javax.swing.JLabel dice06lbl;
     private javax.swing.JLabel dice1lbl;
     private javax.swing.JLabel fives;
     private javax.swing.JButton fivesValue1;
@@ -532,6 +558,11 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JButton full1;
     private javax.swing.JButton full2;
     private javax.swing.JLabel fullH;
+    private javax.swing.JButton h1;
+    private javax.swing.JButton h2;
+    private javax.swing.JButton h3;
+    private javax.swing.JButton h4;
+    private javax.swing.JButton h5;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel2;
