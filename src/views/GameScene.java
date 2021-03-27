@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -15,7 +14,7 @@ public class GameScene extends javax.swing.JFrame {
 
     Dices dices = new Dices();
     ArrayList<JLabel> labels = new ArrayList<>();
-    
+
     public GameScene() {
         initComponents();
         loadDicePictures();
@@ -23,9 +22,8 @@ public class GameScene extends javax.swing.JFrame {
         labels.add(dice02lbl);
         labels.add(dice03lbl);
         labels.add(dice04lbl);
-        labels.add(dice05lbl);   
+        labels.add(dice05lbl);
     }
-   
 
     public void loadDicePictures() {
         dice1lbl.setIcon(dices.getDice01Image());
@@ -99,11 +97,11 @@ public class GameScene extends javax.swing.JFrame {
         foursValue1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         roll = new javax.swing.JButton();
-        h5 = new javax.swing.JButton();
-        h1 = new javax.swing.JButton();
-        h2 = new javax.swing.JButton();
-        h3 = new javax.swing.JButton();
-        h4 = new javax.swing.JButton();
+        h5 = new javax.swing.JToggleButton();
+        h1 = new javax.swing.JToggleButton();
+        h2 = new javax.swing.JToggleButton();
+        h3 = new javax.swing.JToggleButton();
+        h4 = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -262,6 +260,11 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(Sixes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 476, 110, 32));
 
         threeKind1.setText("-");
+        threeKind1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threeKind1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(threeKind1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 528, 94, 33));
 
         sixesValue1.setText("-");
@@ -273,6 +276,11 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(sixesValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 364, 94, 33));
 
         threeKind2.setText("-");
+        threeKind2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                threeKind2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(threeKind2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 528, 94, 33));
 
         sumPlayer2.setText("sumPlayer2");
@@ -288,9 +296,19 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(bonusPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 477, 94, 33));
 
         fourKind2.setText("-");
+        fourKind2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fourKind2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(fourKind2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 578, 94, 33));
 
         fourKind1.setText("-");
+        fourKind1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fourKind1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(fourKind1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 578, 94, 33));
 
         fourKind.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -302,21 +320,51 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(largeS, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 788, 110, 32));
 
         full2.setText("-");
+        full2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                full2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(full2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 629, 94, 33));
 
         full1.setText("-");
+        full1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                full1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(full1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 631, 94, 33));
 
         smallS1.setText("-");
+        smallS1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smallS1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(smallS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 684, 94, 33));
 
         chance1.setText("-");
+        chance1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chance1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(chance1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 790, 94, 33));
 
         smallS2.setText("-");
+        smallS2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smallS2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(smallS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 684, 94, 33));
 
         largeS2.setText("-");
+        largeS2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                largeS2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(largeS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 737, 94, 33));
 
         fullH.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -328,15 +376,35 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(smallS, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 682, 110, 32));
 
         chance2.setText("-");
+        chance2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chance2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(chance2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 790, 94, 33));
 
         largeS1.setText("-");
+        largeS1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                largeS1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(largeS1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 737, 94, 33));
 
         yahtzee2.setText("-");
+        yahtzee2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yahtzee2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(yahtzee2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 843, 94, 33));
 
         yahtzee1.setText("-");
+        yahtzee1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yahtzee1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(yahtzee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 843, 94, 33));
 
         large.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -367,10 +435,10 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(dice03lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, 110));
 
         dice04lbl.setText("jLabel1");
-        getContentPane().add(dice04lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 630, 110, 110));
+        getContentPane().add(dice04lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 110, 110));
 
         dice05lbl.setText("jLabel1");
-        getContentPane().add(dice05lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 110, 110));
+        getContentPane().add(dice05lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 630, 110, 110));
 
         foursValue1.setText("-");
         foursValue1.addActionListener(new java.awt.event.ActionListener() {
@@ -404,26 +472,49 @@ public class GameScene extends javax.swing.JFrame {
         getContentPane().add(roll, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 810, 340, 70));
 
         h5.setText("H");
+        h5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                h5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(h5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 630, 40, 110));
 
         h1.setText("H");
-        getContentPane().add(h1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 40, 110));
+        h1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                h1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(h1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 69, 40, 110));
 
         h2.setText("H");
+        h2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                h2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(h2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 40, 110));
 
         h3.setText("H");
+        h3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                h3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(h3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 40, 110));
 
         h4.setText("H");
+        h4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                h4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(h4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 40, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
+
     private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
         onesValue1.setEnabled(false);
 
@@ -474,29 +565,117 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_sixesValue2ActionPerformed
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
-        
-        System.out.println(dice1lbl.getWidth()+" "+dice1lbl.getHeight());
+
         // randomizing dices in array
         ArrayList<ImageIcon> icons = dices.getIcons();
         Random rand = new Random();
-        
+
         // shuffle icons and labels and match them randomly
         Collections.shuffle(icons);
         Collections.shuffle(labels);
-        
+
         // every label get random dice
         int random = 0;
         for (int i = 0; i < 5; i++) {
             random = rand.nextInt(4);
-            System.out.println(random);
-            labels.get(i).setIcon(icons.get(random));
-        }
-        System.out.println("---------");
+            // if dice not holding to other round
+            if (labels.get(i).isEnabled()) {
+                labels.get(i).setIcon(icons.get(random));
+            }
 
-        
-         
-        
+        }
     }//GEN-LAST:event_rollActionPerformed
+
+    private void threeKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind1ActionPerformed
+        threeKind1.setEnabled(false);
+    }//GEN-LAST:event_threeKind1ActionPerformed
+
+    private void threeKind2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind2ActionPerformed
+        threeKind2.setEnabled(false);
+    }//GEN-LAST:event_threeKind2ActionPerformed
+
+    private void fourKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourKind1ActionPerformed
+        fourKind1.setEnabled(false);
+    }//GEN-LAST:event_fourKind1ActionPerformed
+
+    private void fourKind2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourKind2ActionPerformed
+        fourKind2.setEnabled(false);
+    }//GEN-LAST:event_fourKind2ActionPerformed
+
+    private void full1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_full1ActionPerformed
+        full1.setEnabled(false);
+    }//GEN-LAST:event_full1ActionPerformed
+
+    private void full2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_full2ActionPerformed
+        full2.setEnabled(false);
+    }//GEN-LAST:event_full2ActionPerformed
+
+    private void smallS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallS1ActionPerformed
+        smallS1.setEnabled(false);
+    }//GEN-LAST:event_smallS1ActionPerformed
+
+    private void smallS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallS2ActionPerformed
+        smallS2.setEnabled(false);
+    }//GEN-LAST:event_smallS2ActionPerformed
+
+    private void largeS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeS1ActionPerformed
+        largeS1.setEnabled(false);
+    }//GEN-LAST:event_largeS1ActionPerformed
+
+    private void largeS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeS2ActionPerformed
+        largeS2.setEnabled(false);
+    }//GEN-LAST:event_largeS2ActionPerformed
+
+    private void chance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chance1ActionPerformed
+        chance1.setEnabled(false);
+    }//GEN-LAST:event_chance1ActionPerformed
+
+    private void chance2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chance2ActionPerformed
+        chance2.setEnabled(false);
+    }//GEN-LAST:event_chance2ActionPerformed
+
+    private void yahtzee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzee1ActionPerformed
+        yahtzee1.setEnabled(false);
+    }//GEN-LAST:event_yahtzee1ActionPerformed
+
+    private void yahtzee2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzee2ActionPerformed
+        yahtzee2.setEnabled(false);
+    }//GEN-LAST:event_yahtzee2ActionPerformed
+
+    private void h1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h1ActionPerformed
+        if (h1.isSelected()) 
+            dice1lbl.setEnabled(false);
+        else
+            dice1lbl.setEnabled(true);
+    }//GEN-LAST:event_h1ActionPerformed
+
+    private void h2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h2ActionPerformed
+        if (h2.isSelected()) 
+            dice02lbl.setEnabled(false);
+        else
+            dice02lbl.setEnabled(true);
+    }//GEN-LAST:event_h2ActionPerformed
+
+    private void h3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h3ActionPerformed
+        if (h3.isSelected()) 
+            dice03lbl.setEnabled(false);
+        else
+            dice03lbl.setEnabled(true);
+    }//GEN-LAST:event_h3ActionPerformed
+
+    private void h4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h4ActionPerformed
+        if (h4.isSelected()) 
+            dice04lbl.setEnabled(false);
+        else
+            dice04lbl.setEnabled(true);
+    }//GEN-LAST:event_h4ActionPerformed
+
+    private void h5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h5ActionPerformed
+        if (h5.isSelected()) 
+            dice05lbl.setEnabled(false);
+        else
+            dice05lbl.setEnabled(true);
+    }//GEN-LAST:event_h5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,11 +737,11 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JButton full1;
     private javax.swing.JButton full2;
     private javax.swing.JLabel fullH;
-    private javax.swing.JButton h1;
-    private javax.swing.JButton h2;
-    private javax.swing.JButton h3;
-    private javax.swing.JButton h4;
-    private javax.swing.JButton h5;
+    private javax.swing.JToggleButton h1;
+    private javax.swing.JToggleButton h2;
+    private javax.swing.JToggleButton h3;
+    private javax.swing.JToggleButton h4;
+    private javax.swing.JToggleButton h5;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel2;
