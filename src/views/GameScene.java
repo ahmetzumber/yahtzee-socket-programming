@@ -1,36 +1,24 @@
 package views;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
+import Utility.*;
 /**
  *
  * @author Ahmet
  */
 public class GameScene extends javax.swing.JFrame {
 
-    Dices dices = new Dices();
-    ArrayList<JLabel> labels = new ArrayList<>();
-
+    Dice map[] = new Dice[5];
+    int rollCount = 0;
+    
     public GameScene() {
         initComponents();
-        loadDicePictures();
-        labels.add(dice1lbl);
-        labels.add(dice02lbl);
-        labels.add(dice03lbl);
-        labels.add(dice04lbl);
-        labels.add(dice05lbl);
-    }
+        map[0] = new Dice(dice01lbl, 1);
+        map[1] = new Dice(dice02lbl, 2);
+        map[2] = new Dice(dice03lbl, 3);
+        map[3] = new Dice(dice04lbl, 4);
+        map[4] = new Dice(dice05lbl, 5);
+        revalidate();
 
-    public void loadDicePictures() {
-        dice1lbl.setIcon(dices.getDice01Image());
-        dice02lbl.setIcon(dices.getDice02Image());
-        dice03lbl.setIcon(dices.getDice03Image());
-        dice04lbl.setIcon(dices.getDice04Image());
-        dice05lbl.setIcon(dices.getDice05Image());
     }
 
     @SuppressWarnings("unchecked")
@@ -89,13 +77,12 @@ public class GameScene extends javax.swing.JFrame {
         sumPlayer3 = new javax.swing.JLabel();
         totalPlayer1 = new javax.swing.JLabel();
         largeS3 = new javax.swing.JLabel();
-        dice1lbl = new javax.swing.JLabel();
+        dice01lbl = new javax.swing.JLabel();
         dice02lbl = new javax.swing.JLabel();
         dice03lbl = new javax.swing.JLabel();
         dice04lbl = new javax.swing.JLabel();
         dice05lbl = new javax.swing.JLabel();
         foursValue1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         roll = new javax.swing.JButton();
         h5 = new javax.swing.JToggleButton();
         h1 = new javax.swing.JToggleButton();
@@ -425,8 +412,8 @@ public class GameScene extends javax.swing.JFrame {
         largeS3.setText("YAHTZEE");
         getContentPane().add(largeS3, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 841, 110, 32));
 
-        dice1lbl.setText("jLabel1");
-        getContentPane().add(dice1lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 110, 110));
+        dice01lbl.setText("jLabel1");
+        getContentPane().add(dice01lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 110, 110));
 
         dice02lbl.setText("jLabel1");
         getContentPane().add(dice02lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 110, 110));
@@ -447,21 +434,6 @@ public class GameScene extends javax.swing.JFrame {
             }
         });
         getContentPane().add(foursValue1, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 260, 94, 33));
-
-        jPanel1.setBackground(new java.awt.Color(220, 220, 220));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 910, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 450, 910));
 
         roll.setText("ROLL DICES");
         roll.addActionListener(new java.awt.event.ActionListener() {
@@ -517,7 +489,7 @@ public class GameScene extends javax.swing.JFrame {
 
     private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
         onesValue1.setEnabled(false);
-
+        DiceUtility.calculateOnes(map);
     }//GEN-LAST:event_onesValue1ActionPerformed
 
     private void onesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue2ActionPerformed
@@ -565,25 +537,16 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_sixesValue2ActionPerformed
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
-
-        // randomizing dices in array
-        ArrayList<ImageIcon> icons = dices.getIcons();
-        Random rand = new Random();
-
-        // shuffle icons and labels and match them randomly
-        Collections.shuffle(icons);
-        Collections.shuffle(labels);
-
-        // every label get random dice
-        int random = 0;
-        for (int i = 0; i < 5; i++) {
-            random = rand.nextInt(4);
-            // if dice not holding to other round
-            if (labels.get(i).isEnabled()) {
-                labels.get(i).setIcon(icons.get(random));
-            }
-
+        rollCount++;
+        for (Dice m : map) 
+            if (m.getLabel().isEnabled()) 
+                m.shuffle();
+        
+        if (rollCount==3) {
+            onesValue1.setText(String.valueOf(DiceUtility.calculateOnes(map)));
         }
+        
+        revalidate();
     }//GEN-LAST:event_rollActionPerformed
 
     private void threeKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind1ActionPerformed
@@ -643,38 +606,43 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_yahtzee2ActionPerformed
 
     private void h1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h1ActionPerformed
-        if (h1.isSelected()) 
-            dice1lbl.setEnabled(false);
-        else
-            dice1lbl.setEnabled(true);
+        if (h1.isSelected()) {
+            dice01lbl.setEnabled(false);
+        } else {
+            dice01lbl.setEnabled(true);
+        }
     }//GEN-LAST:event_h1ActionPerformed
 
     private void h2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h2ActionPerformed
-        if (h2.isSelected()) 
+        if (h2.isSelected()) {
             dice02lbl.setEnabled(false);
-        else
+        } else {
             dice02lbl.setEnabled(true);
+        }
     }//GEN-LAST:event_h2ActionPerformed
 
     private void h3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h3ActionPerformed
-        if (h3.isSelected()) 
+        if (h3.isSelected()) {
             dice03lbl.setEnabled(false);
-        else
+        } else {
             dice03lbl.setEnabled(true);
+        }
     }//GEN-LAST:event_h3ActionPerformed
 
     private void h4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h4ActionPerformed
-        if (h4.isSelected()) 
+        if (h4.isSelected()) {
             dice04lbl.setEnabled(false);
-        else
+        } else {
             dice04lbl.setEnabled(true);
+        }
     }//GEN-LAST:event_h4ActionPerformed
 
     private void h5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h5ActionPerformed
-        if (h5.isSelected()) 
+        if (h5.isSelected()) {
             dice05lbl.setEnabled(false);
-        else
+        } else {
             dice05lbl.setEnabled(true);
+        }
     }//GEN-LAST:event_h5ActionPerformed
 
     /**
@@ -720,11 +688,11 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel bonusPlayer2;
     private javax.swing.JButton chance1;
     private javax.swing.JButton chance2;
+    private javax.swing.JLabel dice01lbl;
     private javax.swing.JLabel dice02lbl;
     private javax.swing.JLabel dice03lbl;
     private javax.swing.JLabel dice04lbl;
     private javax.swing.JLabel dice05lbl;
-    private javax.swing.JLabel dice1lbl;
     private javax.swing.JLabel fives;
     private javax.swing.JButton fivesValue1;
     private javax.swing.JButton fivesValue2;
@@ -747,7 +715,6 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel large;
     private javax.swing.JLabel largeS;
     private javax.swing.JButton largeS1;
