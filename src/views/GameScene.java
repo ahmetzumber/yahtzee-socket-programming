@@ -1,22 +1,26 @@
 package views;
 
 import Utility.*;
+import java.awt.Color;
+import java.awt.Dimension;
 /**
  *
  * @author Ahmet
  */
 public class GameScene extends javax.swing.JFrame {
 
-    Dice map[] = new Dice[5];
+    Dice dices[] = new Dice[5];
     int rollCount = 0;
     
     public GameScene() {
         initComponents();
-        map[0] = new Dice(dice01lbl, 1);
-        map[1] = new Dice(dice02lbl, 2);
-        map[2] = new Dice(dice03lbl, 3);
-        map[3] = new Dice(dice04lbl, 4);
-        map[4] = new Dice(dice05lbl, 5);
+        jPanel2.setBackground(Color.decode("#845ec2"));
+        jPanel2.setSize(1190, 1015);
+        dices[0] = new Dice(dice01lbl, 1);
+        dices[1] = new Dice(dice02lbl, 2);
+        dices[2] = new Dice(dice03lbl, 3);
+        dices[3] = new Dice(dice04lbl, 4);
+        dices[4] = new Dice(dice05lbl, 5);
         revalidate();
 
     }
@@ -89,6 +93,7 @@ public class GameScene extends javax.swing.JFrame {
         h2 = new javax.swing.JToggleButton();
         h3 = new javax.swing.JToggleButton();
         h4 = new javax.swing.JToggleButton();
+        jPanel2 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -116,10 +121,11 @@ public class GameScene extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Y A H T Z E E");
-        setBackground(new java.awt.Color(126, 202, 156));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setForeground(new java.awt.Color(126, 202, 156));
+        setMaximumSize(new java.awt.Dimension(1162, 1015));
+        setMinimumSize(new java.awt.Dimension(1162, 1015));
         setPreferredSize(new java.awt.Dimension(1130, 1014));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -483,13 +489,29 @@ public class GameScene extends javax.swing.JFrame {
         });
         getContentPane().add(h4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 40, 110));
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(1162, 1015));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1162, 1015));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1170, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 1020));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
         onesValue1.setEnabled(false);
-        DiceUtility.calculateOnes(map);
+        DiceUtility.calculateOnes(dices);
     }//GEN-LAST:event_onesValue1ActionPerformed
 
     private void onesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue2ActionPerformed
@@ -538,13 +560,25 @@ public class GameScene extends javax.swing.JFrame {
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
         rollCount++;
-        for (Dice m : map) 
-            if (m.getLabel().isEnabled()) 
-                m.shuffle();
+        for (Dice d : dices) 
+            if (d.getLabel().isEnabled()) 
+                d.shuffle();
         
-        if (rollCount==3) {
-            onesValue1.setText(String.valueOf(DiceUtility.calculateOnes(map)));
-        }
+        // Player 1 scores 
+        onesValue1.setText(String.valueOf(DiceUtility.calculateOnes(dices)));
+        twosValue1.setText(String.valueOf(DiceUtility.calculateTwos(dices)));
+        threesValue1.setText(String.valueOf(DiceUtility.calculateThrees(dices)));
+        foursValue1.setText(String.valueOf(DiceUtility.calculateFours(dices)));
+        fivesValue1.setText(String.valueOf(DiceUtility.calculateFives(dices)));
+        sixesValue1.setText(String.valueOf(DiceUtility.calculateSixes(dices)));
+        
+        // Player 2 scores
+        onesValue2.setText(String.valueOf(DiceUtility.calculateOnes(dices)));
+        twosValue2.setText(String.valueOf(DiceUtility.calculateTwos(dices)));
+        threesValue2.setText(String.valueOf(DiceUtility.calculateThrees(dices)));
+        foursValue2.setText(String.valueOf(DiceUtility.calculateFours(dices)));
+        fivesValue2.setText(String.valueOf(DiceUtility.calculateFives(dices)));
+        sixesValue2.setText(String.valueOf(DiceUtility.calculateSixes(dices)));
         
         revalidate();
     }//GEN-LAST:event_rollActionPerformed
@@ -715,6 +749,7 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel large;
     private javax.swing.JLabel largeS;
     private javax.swing.JButton largeS1;
