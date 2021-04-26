@@ -571,10 +571,13 @@ public class GameScene extends javax.swing.JFrame {
         foursValue1.setText(String.valueOf(DiceUtility.calculateFours(dices)));
         fivesValue1.setText(String.valueOf(DiceUtility.calculateFives(dices)));
         sixesValue1.setText(String.valueOf(DiceUtility.calculateSixes(dices)));
-        threeKind1.setText(String.valueOf(DiceUtility.calculateThreeOfKind(dices))); // three of a kind
-        fourKind1.setText(String.valueOf(DiceUtility.calculateFourOfKind(dices)));   // four of a kind 
-        smallS1.setText(String.valueOf(DiceUtility.smallStraight(dices)));           // small straight
-        largeS1.setText(String.valueOf(DiceUtility.largeStraight(dices)));           // large straight
+        threeKind1.setText(String.valueOf(DiceUtility.threeOfKind(dices)));      // three of a kind
+        fourKind1.setText(String.valueOf(DiceUtility.fourOfKind(dices)));        // four of a kind 
+        full1.setText(String.valueOf(DiceUtility.fullHouse(dices)));             // full house
+        smallS1.setText(String.valueOf(DiceUtility.smallStraight(dices)));       // small straight
+        largeS1.setText(String.valueOf(DiceUtility.largeStraight(dices)));       // large straight
+        chance1.setText(String.valueOf(DiceUtility.chance(dices)));              // chance
+        yahtzee1.setText(String.valueOf(DiceUtility.yahtzee(dices)));            // yahtzee
         
         // Player 2 scores
         onesValue2.setText(String.valueOf(DiceUtility.calculateOnes(dices)));
@@ -583,10 +586,13 @@ public class GameScene extends javax.swing.JFrame {
         foursValue2.setText(String.valueOf(DiceUtility.calculateFours(dices)));
         fivesValue2.setText(String.valueOf(DiceUtility.calculateFives(dices)));
         sixesValue2.setText(String.valueOf(DiceUtility.calculateSixes(dices)));
-        threeKind2.setText(String.valueOf(DiceUtility.calculateThreeOfKind(dices))); // three of a kind
-        fourKind2.setText(String.valueOf(DiceUtility.calculateFourOfKind(dices)));   // four of a kind 
-        smallS2.setText(String.valueOf(DiceUtility.smallStraight(dices)));           // small straight
-        largeS2.setText(String.valueOf(DiceUtility.largeStraight(dices)));           // large straight
+        threeKind2.setText(String.valueOf(DiceUtility.threeOfKind(dices)));      // three of a kind
+        fourKind2.setText(String.valueOf(DiceUtility.fourOfKind(dices)));        // four of a kind 
+        full2.setText(String.valueOf(DiceUtility.fullHouse(dices)));             // full house
+        smallS2.setText(String.valueOf(DiceUtility.smallStraight(dices)));       // small straight
+        largeS2.setText(String.valueOf(DiceUtility.largeStraight(dices)));       // large straight
+        chance2.setText(String.valueOf(DiceUtility.chance(dices)));              // chance
+        yahtzee2.setText(String.valueOf(DiceUtility.yahtzee(dices)));            // yahtzee
         revalidate();
     }//GEN-LAST:event_rollActionPerformed
 
