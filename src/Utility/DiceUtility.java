@@ -98,7 +98,7 @@ public class DiceUtility {
             if (d.value == 3) threes++;      
             if (d.value == 4) fours++;    
             if (d.value == 5) fives++;    
-            if (d.value == 6) sixes++;     
+            if (d.value == 6) sixes++;          
         }
         // if anyone has 4 same number than return 25 point
         if (ones == 4 || twos == 4 || threes == 4 || fours == 4 || fives == 4 || sixes == 4) 
