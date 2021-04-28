@@ -14,6 +14,9 @@ public class SClient {
     ObjectOutputStream sOutput;
     ObjectInputStream sInput;
     
+    // dinleme threadi
+    SCListenThread scListenThread;
+    
     //rakip client
     SClient rival;
     
@@ -24,12 +27,17 @@ public class SClient {
 
         try {
             this.socket = socket;
+            this.scListenThread = new SCListenThread(this);
             this.sOutput = new ObjectOutputStream(this.socket.getOutputStream());
             this.sInput = new ObjectInputStream(this.socket.getInputStream());
         } catch (IOException ex) {
             Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+     
+    public void listen(){
+        this.scListenThread.start();
     }
     
     //client mesaj gönderme
