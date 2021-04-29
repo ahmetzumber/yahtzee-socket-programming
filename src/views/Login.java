@@ -5,6 +5,8 @@
  */
 package views;
 
+import Server.SClient;
+import Server.Server;
 import javax.swing.JOptionPane;
 
 /**

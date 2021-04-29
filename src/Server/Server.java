@@ -2,8 +2,6 @@ package Server;
 
 import Message.Message;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ public class Server {
     public static Semaphore pairingSemp = new Semaphore(1,true);
     public static ArrayList<SClient> sclients;
     SListenThread listenThread;
-    SPairingThread pairingThread;
     ServerSocket socket;
     int port;
     
@@ -31,11 +28,10 @@ public class Server {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public void Listen(){
+    public void Listen(){
         this.listenThread.start();
     }
-   
-    
+
     public static void Send(SClient cl, Message msg) {
         try {
             cl.sOutput.writeObject(msg);
@@ -44,3 +40,29 @@ public class Server {
         }
     }
 }
+
+class SListenThread  extends Thread {
+    
+    Server server;
+    
+    public SListenThread(Server server){
+        this.server = server;
+    }
+    
+    @Override
+    public void run() {
+        while(!this.server.socket.isClosed()){
+            try {
+                System.out.println("Listeningg...");
+                Socket newSocket = this.server.socket.accept();
+                SClient newSClient = new SClient(newSocket);
+                newSClient.listen();
+                this.server.sclients.add(newSClient);
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+    }
+    
+}
+
