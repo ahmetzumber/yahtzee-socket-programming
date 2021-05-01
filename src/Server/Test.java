@@ -11,7 +11,6 @@ package Server;
  */
 public class Test {
     public static void main(String[] args) {
-        Server server = new Server(8080);
-        server.Listen();
+        Server.Start(8080);
     }
 }

@@ -11,35 +11,33 @@ import java.util.logging.Logger;
 
 public class SClient {
 
+    int clientID;
     Socket socket;
-    String name = "NoName";
+    public static boolean wantToPair = false;
+    public String name = "NoName";
     ObjectOutputStream sOutput;
     ObjectInputStream sInput;
-
     // dinleme threadi
-    SCListenThread scListenThread;
-
+    Listen listenThread;
+    // eslesme threadi
+    PairingThread pairThread;
     //rakip client
     SClient rival;
-
     //eşleşme durumu
     public boolean paired = false;
 
-    public SClient(Socket socket) {
-
+    public SClient(int clientID, Socket socket) {
         try {
             this.socket = socket;
-            this.scListenThread = new SCListenThread(this);
+            this.clientID = clientID;
+            this.listenThread = new Listen(this);
+            this.pairThread = new PairingThread(this);
             this.sOutput = new ObjectOutputStream(this.socket.getOutputStream());
             this.sInput = new ObjectInputStream(this.socket.getInputStream());
         } catch (IOException ex) {
             Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-    public void listen() {
-        this.scListenThread.start();
     }
 
     //client mesaj gönderme
@@ -52,41 +50,63 @@ public class SClient {
 
     }
 
-    class SCListenThread extends Thread {
+    public class Listen extends Thread {
 
         SClient sclient;
 
-        public SCListenThread(SClient sclient) {
+        public Listen(SClient sclient) {
             this.sclient = sclient;
         }
 
         @Override
         public void run() {
-            while (!this.sclient.socket.isClosed()) {
+            while (sclient.socket.isConnected()) {
                 try {
-                    Object msg = this.sclient.sInput.readObject();
-                    System.out.println("SClient Message: " + msg.toString());
+                    Message msg = (Message) sclient.sInput.readObject();
+                    switch (msg.type) {
+                        case Name:
+                            wantToPair = true;
+                            sclient.name = msg.content.toString();
+                            sclient.pairThread.start();
+                            break;
+                        case Disconnect:
+                            break;
+                        case RivalRequest:
+                            break;
+                        case ROLL:
+                            Server.Send(sclient.rival, msg);
+                            break;
+                        case GameControl:
+                            Server.Send(sclient.rival, msg);
+                            break;
+                        case Dice:
+                            Server.Send(sclient.rival, msg);
+                            break;
+                        case PNTSELECT:
+                            Server.Send(sclient.rival, msg);
+                            break;
+                    }
                 } catch (IOException ex) {
-                    Logger.getLogger(SCListenThread.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Listen.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(SCListenThread.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Listen.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
 
     }
 
-    public class SPairingThread extends Thread {
+    public class PairingThread extends Thread {
 
         SClient sclient;
 
-        public SPairingThread(SClient sclient) {
+        public PairingThread(SClient sclient) {
             this.sclient = sclient;
         }
 
         @Override
         public void run() {
-            while (this.sclient.paired == false && this.sclient.socket.isConnected()) {
+            while (this.sclient.paired == false && this.sclient.socket.isConnected() && SClient.wantToPair == true) {
                 try {
                     //lock mekanizması
                     //sadece bir client içeri grebilir
@@ -97,34 +117,45 @@ public class SClient {
                     if (!sclient.paired) {
                         SClient selectedPair = null;
                         while (selectedPair == null && this.sclient.socket.isConnected()) {
-                            for (SClient i : Server.sclients) {
-                                if (!i.equals(this.sclient) && i.paired == false) {
-                                    //eşleşme sağlandı ve gerekli işaretlemeler yapıldı
-                                    selectedPair = i;
-                                    this.sclient.rival = selectedPair;
-                                    selectedPair.rival = this.sclient;
+                            for (SClient client : Server.sclients) {
+                                if (sclient != client && client.rival == null && client.wantToPair == true) {
+                                    selectedPair = client;
                                     selectedPair.paired = true;
-                                    this.sclient.paired = true;
+                                    selectedPair.rival = sclient;
+                                    sclient.rival = selectedPair;
+                                    sclient.paired = true;
+
+                                    // eşleşme oldu
+                                    Message msg1 = new Message(Message.Message_Type.RivalConnected);
+                                    msg1.content = sclient.name;
+                                    Server.Send(sclient.rival, msg1);
+
+                                    Message msg2 = new Message(Message.Message_Type.RivalConnected);
+                                    msg2.content = sclient.rival.name;
+                                    Server.Send(sclient, msg2);
+
+                                    Message msg3 = new Message(Message.Message_Type.GameControl);
+                                    int a = 0;
+                                    msg3.content = a;
+                                    Server.Send(sclient, msg3);
+
+                                    Message msg4 = new Message(Message.Message_Type.GameControl);
+                                    int b = 1;
+                                    msg4.content = b;
+                                    Server.Send(sclient.rival, msg4);
+
                                     break;
                                 }
                             }
                             //sürekli dönmesin 1 saniyede bir dönsün
                             sleep(1000);
                         }
-                        // eşleşme oldu
-                        Message msg1 = new Message(Message.Message_Type.RivalConnected);
-                        msg1.content = sclient.name;
-                        Server.Send(sclient.rival, msg1);
-
-                        Message msg2 = new Message(Message.Message_Type.RivalConnected);
-                        msg1.content = sclient.name;
-                        Server.Send(sclient.rival, msg2);
                     }
                     //lock mekanizmasını servest bırak
                     //bırakılmazsa deadlock olur.
                     Server.pairingSemp.release(1);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(SPairingThread.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PairingThread.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

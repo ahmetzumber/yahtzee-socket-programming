@@ -3,17 +3,31 @@ package views;
 import Utility.*;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Client.*;
 /**
  *
  * @author Ahmet
  */
 public class GameScene extends javax.swing.JFrame {
 
+    public static GameScene thisGame;
+    
+    public static Thread tmr_slider;
+    
+    public int gameState = 0;      // game state 1 ise 
+
+    public int roundControl = 0;   // kimin baslayacagının controlü (1 olan baslar)
+    
+    public int myRoundNum = 0, rivalRoundNum = 0;
+    
     Dice dices[] = new Dice[5];
     int rollCount = 0;
     
     public GameScene() {
         initComponents();
+        thisGame = this;
         jPanel2.setBackground(Color.decode("#845ec2"));
         jPanel2.setSize(1190, 1015);
         dices[0] = new Dice(dice01lbl, 1);
@@ -21,10 +35,66 @@ public class GameScene extends javax.swing.JFrame {
         dices[2] = new Dice(dice03lbl, 3);
         dices[3] = new Dice(dice04lbl, 4);
         dices[4] = new Dice(dice05lbl, 5);
-        revalidate();
+        
+        tmr_slider = new Thread(() -> {
+            //soket bağlıysa dönsün
+            while (Client.socket.isConnected()) {
+                try {
+                    // oyun aktif ise
+                    if (gameState == 1) {
+                        //Client.Display("ben:" + myRoundNum + " - rival:" + rivalRoundNum + "\n Oyun Bitti:");
+                        if (myRoundNum == 13 && rivalRoundNum == 13) {
+                            // Totalde iki taraf da 13 tur oynadıktan sonra oyun tamamlanır.
+                            Thread.sleep(10);
+                            Thread.sleep(10);
+                            changeTurn(false);
+                            Thread.sleep(2);
+                            gameState = 0;
+                            // gameState 0 olduğunda artık oyun döngüsü bitmiş oluyor ve else koşuluna düşüyor.
+                        }
+                    } else {
+                        // Oyun durumu değiştikten sonra client durur.
+                        Thread.sleep(4000);
+                        Client.Stop();
+                        tmr_slider.stop();
+                        Thread.sleep(7000);
 
+                    }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GameScene.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        revalidate();
     }
 
+    public void changeTurn(boolean control){
+        // Benim sıramda iken clientın erişimi engellenir
+        h1.setEnabled(control);
+        h2.setEnabled(control);
+        h3.setEnabled(control);
+        h4.setEnabled(control);
+        h5.setEnabled(control);
+        roll.setEnabled(control);
+        
+        onesValue1.setEnabled(control);
+        twosValue1.setEnabled(control);
+        threesValue1.setEnabled(control);
+        foursValue1.setEnabled(control);
+        fivesValue1.setEnabled(control);
+        sixesValue1.setEnabled(control);   
+        threeKind1.setEnabled(control);
+        fourKind1.setEnabled(control);
+        full1.setEnabled(control);
+        smallS1.setEnabled(control);
+        largeS1.setEnabled(control);
+        chance1.setEnabled(control);
+        yahtzee1.setEnabled(control);
+        
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,8 +102,8 @@ public class GameScene extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jFrame2 = new javax.swing.JFrame();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        player1 = new javax.swing.JLabel();
+        player2 = new javax.swing.JLabel();
         ones = new javax.swing.JLabel();
         twos = new javax.swing.JLabel();
         threes = new javax.swing.JLabel();
@@ -128,13 +198,13 @@ public class GameScene extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel3.setText("Player 1");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(848, 70, -1, -1));
+        player1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        player1.setText("Player 1");
+        getContentPane().add(player1, new org.netbeans.lib.awtextra.AbsoluteConstraints(848, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel4.setText("Player 2");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 70, -1, -1));
+        player2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        player2.setText("Player 2");
+        getContentPane().add(player2, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 70, -1, -1));
 
         ones.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         ones.setText("Ones");
@@ -760,8 +830,6 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel large;
     private javax.swing.JLabel largeS;
@@ -771,6 +839,8 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JLabel ones;
     private javax.swing.JButton onesValue1;
     private javax.swing.JButton onesValue2;
+    public javax.swing.JLabel player1;
+    public javax.swing.JLabel player2;
     private javax.swing.JButton roll;
     private javax.swing.JButton sixesValue1;
     private javax.swing.JButton sixesValue2;

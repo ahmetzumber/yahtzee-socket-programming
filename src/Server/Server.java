@@ -12,24 +12,22 @@ import java.util.logging.Logger;
 
 public class Server {
     
+    public static int port;
+    public static int clientID = 0;
+    public static ServerSocket socket;
+    public static SListenThread listenThread;
+    public static ArrayList<SClient> sclients = new ArrayList();
     public static Semaphore pairingSemp = new Semaphore(1,true);
-    public static ArrayList<SClient> sclients;
-    SListenThread listenThread;
-    ServerSocket socket;
-    int port;
     
-    public Server(int port){
+    public static void Start(int port){
         try {
-            this.port = port;
-            this.sclients = new ArrayList();
-            this.socket = new ServerSocket(this.port);
-            this.listenThread = new SListenThread(this);
+            Server.port = port;
+            Server.socket = new ServerSocket(Server.port);
+            Server.listenThread = new SListenThread();
+            Server.listenThread.start();
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    public void Listen(){
-        this.listenThread.start();
     }
 
     public static void Send(SClient cl, Message msg) {
@@ -43,21 +41,17 @@ public class Server {
 
 class SListenThread  extends Thread {
     
-    Server server;
-    
-    public SListenThread(Server server){
-        this.server = server;
-    }
-    
     @Override
     public void run() {
-        while(!this.server.socket.isClosed()){
+        while(!Server.socket.isClosed()){
             try {
-                System.out.println("Listeningg...");
-                Socket newSocket = this.server.socket.accept();
-                SClient newSClient = new SClient(newSocket);
-                newSClient.listen();
-                this.server.sclients.add(newSClient);
+                System.out.println("Listeningg...and client waiting....");
+                Socket newSocket = Server.socket.accept();
+                System.out.println("Client came...."); 
+                SClient newSClient = new SClient(Server.clientID,newSocket);
+                Server.clientID++;
+                Server.sclients.add(newSClient);
+                newSClient.listenThread.start();
             } catch (IOException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             } 
