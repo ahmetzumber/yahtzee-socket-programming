@@ -2,10 +2,18 @@ package views;
 
 import Utility.*;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Client.*;
+import Message.Message;
+import Message.ScoreMessage;
+import java.util.ArrayList;
+import Message.ScoreMessage.Scores;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JToggleButton;
+
 /**
  *
  * @author Ahmet
@@ -13,21 +21,26 @@ import Client.*;
 public class GameScene extends javax.swing.JFrame {
 
     public static GameScene thisGame;
-    
     public static Thread tmr_slider;
-    
     public int gameState = 0;      // game state 1 ise 
-
-    public int roundControl = 0;   // kimin baslayacagının controlü (1 olan baslar)
-    
+    public int roundControl;   // kimin baslayacagının controlü (1 olan baslar)
     public int myRoundNum = 0, rivalRoundNum = 0;
+    public static ArrayList<Score> myPoints;
+    public static ArrayList<Score> rivalPoints;
+    public static ArrayList<JToggleButton> activeButtons;
     
+
     Dice dices[] = new Dice[5];
     int rollCount = 0;
-    
+
     public GameScene() {
         initComponents();
+        myPoints = new ArrayList();
+        rivalPoints = new ArrayList();
+        activeButtons = new ArrayList();
         thisGame = this;
+        initScores();
+        disableRivalButtons(false);
         jPanel2.setBackground(Color.decode("#845ec2"));
         jPanel2.setSize(1190, 1015);
         dices[0] = new Dice(dice01lbl, 1);
@@ -35,7 +48,7 @@ public class GameScene extends javax.swing.JFrame {
         dices[2] = new Dice(dice03lbl, 3);
         dices[3] = new Dice(dice04lbl, 4);
         dices[4] = new Dice(dice05lbl, 5);
-        
+
         tmr_slider = new Thread(() -> {
             //soket bağlıysa dönsün
             while (Client.socket.isConnected()) {
@@ -65,36 +78,128 @@ public class GameScene extends javax.swing.JFrame {
                 }
             }
         });
-        
+
         revalidate();
     }
-
-    public void changeTurn(boolean control){
-        // Benim sıramda iken clientın erişimi engellenir
-        h1.setEnabled(control);
-        h2.setEnabled(control);
-        h3.setEnabled(control);
-        h4.setEnabled(control);
-        h5.setEnabled(control);
-        roll.setEnabled(control);
-        
-        onesValue1.setEnabled(control);
-        twosValue1.setEnabled(control);
-        threesValue1.setEnabled(control);
-        foursValue1.setEnabled(control);
-        fivesValue1.setEnabled(control);
-        sixesValue1.setEnabled(control);   
-        threeKind1.setEnabled(control);
-        fourKind1.setEnabled(control);
-        full1.setEnabled(control);
-        smallS1.setEnabled(control);
-        largeS1.setEnabled(control);
-        chance1.setEnabled(control);
-        yahtzee1.setEnabled(control);
-        
+    
+    public JButton getRivalButtonByGivenType(Scores score_type){
+        // Verilen score türüne göre rakibin butonuna erişmek için
+        for (Score rivalPoint : rivalPoints) 
+            if (rivalPoint.getScore_type() == score_type) 
+                return rivalPoint.getButton(); 
+        return null;
     }
     
+    public void initScores() {
+        
+        // player 1 score
+        myPoints.add(new Score(Scores.ONES, onesValue1));
+        myPoints.add(new Score(Scores.TWOS, twosValue1));
+        myPoints.add(new Score(Scores.THREES, threesValue1));
+        myPoints.add(new Score(Scores.FOURS, foursValue1));
+        myPoints.add(new Score(Scores.FIVES, fivesValue1));
+        myPoints.add(new Score(Scores.SIXES, sixesValue1));
+        myPoints.add(new Score(Scores.THREEKIND, threeKind1));
+        myPoints.add(new Score(Scores.FOURKIND, fourKind1));
+        myPoints.add(new Score(Scores.FULLHOUSE, full1));
+        myPoints.add(new Score(Scores.SMALLSTR, smallS1));
+        myPoints.add(new Score(Scores.LARGESTR, largeS1));
+        myPoints.add(new Score(Scores.CHANCE, chance1));
+        myPoints.add(new Score(Scores.YAHTZEE, yahtzee1));
+        
+        // player 2 scores
+        rivalPoints.add(new Score(Scores.ONES, onesValue2));
+        rivalPoints.add(new Score(Scores.TWOS, twosValue2));
+        rivalPoints.add(new Score(Scores.THREES, threesValue2));
+        rivalPoints.add(new Score(Scores.FOURS, foursValue2));
+        rivalPoints.add(new Score(Scores.FIVES, fivesValue2));
+        rivalPoints.add(new Score(Scores.SIXES, sixesValue2));
+        rivalPoints.add(new Score(Scores.THREEKIND, threeKind2));
+        rivalPoints.add(new Score(Scores.FOURKIND, fourKind2));
+        rivalPoints.add(new Score(Scores.FULLHOUSE, full2));
+        rivalPoints.add(new Score(Scores.SMALLSTR, smallS2));
+        rivalPoints.add(new Score(Scores.LARGESTR, largeS2));
+        rivalPoints.add(new Score(Scores.CHANCE, chance2));
+        rivalPoints.add(new Score(Scores.YAHTZEE, yahtzee2));
+        
+        activeButtons.add(h1);
+        activeButtons.add(h2);
+        activeButtons.add(h3);
+        activeButtons.add(h4);
+        activeButtons.add(h5);
+        
+        addEventListenerToButtons();
+    }
+
+    public void changeTurn(boolean control) {
+        
+        // Benim sıramda iken clientın erişimi engellenir
+        roll.setEnabled(control);
+        
+        for (JToggleButton activeButton : activeButtons) 
+            activeButton.setEnabled(control);
+
+        // player1 buttons
+        for (Score myPoint : myPoints) 
+            if(!myPoint.isButtonChoosen)
+                myPoint.getButton().setEnabled(control);       
+    }
+
+    public void disableRivalButtons(boolean control) {
+        // player1 buttons
+        onesValue2.setEnabled(control);
+        twosValue2.setEnabled(control);
+        threesValue2.setEnabled(control);
+        foursValue2.setEnabled(control);
+        fivesValue2.setEnabled(control);
+        sixesValue2.setEnabled(control);
+        threeKind2.setEnabled(control);
+        fourKind2.setEnabled(control);
+        full2.setEnabled(control);
+        smallS2.setEnabled(control);
+        largeS2.setEnabled(control);
+        chance2.setEnabled(control);
+        yahtzee2.setEnabled(control);
+    }
+
+    public void addEventListenerToButtons() {
+        for (Score myPoint : myPoints) {
+            myPoint.getButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    if (roundControl == 1) {
+                        ScoreMessage score = new ScoreMessage(myPoint.getScore_type());
+                        try {
+                            score.content = Integer.parseInt(myPoint.getButton().getText());
+                        } catch (Exception e) {
+                            myPoint.getButton().setText("0");
+                            score.content = 0;
+                        }
+                        roundControl = 0;   
+                        myPoint.isButtonChoosen = true;
+                        Message msg = new Message(Message.Message_Type.ChangeTurn);
+                        msg.content = score;
+                        Client.Send(msg);
+                        System.out.println("mesajı yolladımmmmm");
+                        disableButtons();
+                    }
+                }
+            });
+        }
+    }
     
+    public void disableButtons(){
+        for (Score myPoint : myPoints) {
+            if (!myPoint.isButtonChoosen) {
+                myPoint.getButton().setText("-");
+            }
+            myPoint.getButton().setEnabled(false);
+        }
+        roll.setEnabled(false);
+        for (JToggleButton activeButton : activeButtons) 
+            activeButton.setEnabled(false);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,16 +225,16 @@ public class GameScene extends javax.swing.JFrame {
         fivesValue1 = new javax.swing.JButton();
         fivesValue2 = new javax.swing.JButton();
         sixesValue2 = new javax.swing.JButton();
-        sum = new javax.swing.JLabel();
+        bonus = new javax.swing.JLabel();
         threeKind = new javax.swing.JLabel();
-        Sixes3 = new javax.swing.JLabel();
+        sum = new javax.swing.JLabel();
         threeKind1 = new javax.swing.JButton();
         sixesValue1 = new javax.swing.JButton();
         threeKind2 = new javax.swing.JButton();
-        sumPlayer2 = new javax.swing.JLabel();
-        totalPlayer2 = new javax.swing.JLabel();
         bonusPlayer2 = new javax.swing.JLabel();
-        bonusPlayer1 = new javax.swing.JLabel();
+        totalPlayer2 = new javax.swing.JLabel();
+        sumPlayer02 = new javax.swing.JLabel();
+        sumPlayer01 = new javax.swing.JLabel();
         fourKind2 = new javax.swing.JButton();
         fourKind1 = new javax.swing.JButton();
         fourKind = new javax.swing.JLabel();
@@ -148,7 +253,7 @@ public class GameScene extends javax.swing.JFrame {
         yahtzee1 = new javax.swing.JButton();
         large = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
-        sumPlayer3 = new javax.swing.JLabel();
+        bonusPlayer01 = new javax.swing.JLabel();
         totalPlayer1 = new javax.swing.JLabel();
         largeS3 = new javax.swing.JLabel();
         dice01lbl = new javax.swing.JLabel();
@@ -310,17 +415,17 @@ public class GameScene extends javax.swing.JFrame {
         });
         getContentPane().add(sixesValue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 362, 94, 35));
 
-        sum.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        sum.setText("Sum");
-        getContentPane().add(sum, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 424, 110, 32));
+        bonus.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        bonus.setText("Bonus");
+        getContentPane().add(bonus, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 424, 110, 32));
 
         threeKind.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         threeKind.setText("Three of a kind");
         getContentPane().add(threeKind, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 526, 110, 32));
 
-        Sixes3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        Sixes3.setText("Bonus");
-        getContentPane().add(Sixes3, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 476, 110, 32));
+        sum.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sum.setText("Sum");
+        getContentPane().add(sum, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 476, 110, 32));
 
         threeKind1.setText("-");
         threeKind1.addActionListener(new java.awt.event.ActionListener() {
@@ -346,17 +451,17 @@ public class GameScene extends javax.swing.JFrame {
         });
         getContentPane().add(threeKind2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 528, 94, 33));
 
-        sumPlayer2.setText("sumPlayer2");
-        getContentPane().add(sumPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 425, 94, 33));
+        bonusPlayer2.setText("             -");
+        getContentPane().add(bonusPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 425, 94, 33));
 
-        totalPlayer2.setText("totalPlayer2");
+        totalPlayer2.setText("               -");
         getContentPane().add(totalPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(958, 895, 94, 33));
 
-        bonusPlayer2.setText("bonusPlayer2");
-        getContentPane().add(bonusPlayer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 477, 93, 33));
+        sumPlayer02.setText("              -");
+        getContentPane().add(sumPlayer02, new org.netbeans.lib.awtextra.AbsoluteConstraints(959, 477, 93, 33));
 
-        bonusPlayer1.setText("bonusPlayer1");
-        getContentPane().add(bonusPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 477, 94, 33));
+        sumPlayer01.setText("               -");
+        getContentPane().add(sumPlayer01, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 477, 94, 33));
 
         fourKind2.setText("-");
         fourKind2.addActionListener(new java.awt.event.ActionListener() {
@@ -478,10 +583,10 @@ public class GameScene extends javax.swing.JFrame {
         total.setText("TOTAL SCORE");
         getContentPane().add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 894, 110, 32));
 
-        sumPlayer3.setText("sumPlayer1");
-        getContentPane().add(sumPlayer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 424, 94, 33));
+        bonusPlayer01.setText("               -");
+        getContentPane().add(bonusPlayer01, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 424, 94, 33));
 
-        totalPlayer1.setText("totalPlayer1");
+        totalPlayer1.setText("               -");
         getContentPane().add(totalPlayer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 895, 94, 33));
 
         largeS3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -580,146 +685,131 @@ public class GameScene extends javax.swing.JFrame {
 
 
     private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
-        onesValue1.setEnabled(false);
-        DiceUtility.calculateOnes(dices);
+
+        
     }//GEN-LAST:event_onesValue1ActionPerformed
 
     private void onesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue2ActionPerformed
-        onesValue2.setEnabled(false);
+
     }//GEN-LAST:event_onesValue2ActionPerformed
 
     private void twosValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twosValue1ActionPerformed
-        twosValue1.setEnabled(false);
+
     }//GEN-LAST:event_twosValue1ActionPerformed
 
     private void twosValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twosValue2ActionPerformed
-        twosValue2.setEnabled(false);
+
     }//GEN-LAST:event_twosValue2ActionPerformed
 
     private void threesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesValue1ActionPerformed
-        threesValue1.setEnabled(false);
+        
     }//GEN-LAST:event_threesValue1ActionPerformed
 
     private void threesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesValue2ActionPerformed
-        threesValue2.setEnabled(false);
+     
     }//GEN-LAST:event_threesValue2ActionPerformed
 
     private void foursValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursValue1ActionPerformed
-        foursValue1.setEnabled(false);
+       
     }//GEN-LAST:event_foursValue1ActionPerformed
 
     private void foursValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursValue2ActionPerformed
-        foursValue2.setEnabled(false);
+       
     }//GEN-LAST:event_foursValue2ActionPerformed
 
     private void fivesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesValue1ActionPerformed
-        fivesValue1.setEnabled(false);
+       
     }//GEN-LAST:event_fivesValue1ActionPerformed
 
     private void fivesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesValue2ActionPerformed
-        fivesValue2.setEnabled(false);
+      
     }//GEN-LAST:event_fivesValue2ActionPerformed
 
     private void sixesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesValue1ActionPerformed
-        sixesValue1.setEnabled(false);
+       
     }//GEN-LAST:event_sixesValue1ActionPerformed
 
     private void sixesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesValue2ActionPerformed
-        sixesValue2.setEnabled(false);
+       
     }//GEN-LAST:event_sixesValue2ActionPerformed
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
         rollCount++;
-        for (Dice d : dices) 
-            if (d.getLabel().isEnabled()) 
+
+        // her oyuncunun bir elde 3 kere zar atma hakkı var
+        if (rollCount == 3) {
+            roll.setEnabled(false);
+        }
+
+        for (Dice d : dices) {
+            if (d.getLabel().isEnabled()) {
                 d.shuffle();
-        
-        // Player 1 scores 
-        onesValue1.setText(String.valueOf(DiceUtility.calculateOnes(dices)));
-        twosValue1.setText(String.valueOf(DiceUtility.calculateTwos(dices)));
-        threesValue1.setText(String.valueOf(DiceUtility.calculateThrees(dices)));
-        foursValue1.setText(String.valueOf(DiceUtility.calculateFours(dices)));
-        fivesValue1.setText(String.valueOf(DiceUtility.calculateFives(dices)));
-        sixesValue1.setText(String.valueOf(DiceUtility.calculateSixes(dices)));
-        threeKind1.setText(String.valueOf(DiceUtility.threeOfKind(dices)));      // three of a kind
-        fourKind1.setText(String.valueOf(DiceUtility.fourOfKind(dices)));        // four of a kind 
-        full1.setText(String.valueOf(DiceUtility.fullHouse(dices)));             // full house
-        smallS1.setText(String.valueOf(DiceUtility.smallStraight(dices)));       // small straight
-        largeS1.setText(String.valueOf(DiceUtility.largeStraight(dices)));       // large straight
-        chance1.setText(String.valueOf(DiceUtility.chance(dices)));              // chance
-        yahtzee1.setText(String.valueOf(DiceUtility.yahtzee(dices)));            // yahtzee
-        
-        // Player 2 scores
-        onesValue2.setText(String.valueOf(DiceUtility.calculateOnes(dices)));
-        twosValue2.setText(String.valueOf(DiceUtility.calculateTwos(dices)));
-        threesValue2.setText(String.valueOf(DiceUtility.calculateThrees(dices)));
-        foursValue2.setText(String.valueOf(DiceUtility.calculateFours(dices)));
-        fivesValue2.setText(String.valueOf(DiceUtility.calculateFives(dices)));
-        sixesValue2.setText(String.valueOf(DiceUtility.calculateSixes(dices)));
-        threeKind2.setText(String.valueOf(DiceUtility.threeOfKind(dices)));      // three of a kind
-        fourKind2.setText(String.valueOf(DiceUtility.fourOfKind(dices)));        // four of a kind 
-        full2.setText(String.valueOf(DiceUtility.fullHouse(dices)));             // full house
-        smallS2.setText(String.valueOf(DiceUtility.smallStraight(dices)));       // small straight
-        largeS2.setText(String.valueOf(DiceUtility.largeStraight(dices)));       // large straight
-        chance2.setText(String.valueOf(DiceUtility.chance(dices)));              // chance
-        yahtzee2.setText(String.valueOf(DiceUtility.yahtzee(dices)));            // yahtzee
+            }
+        }
+        // dünyanın en güzel kodu
+        for (Score myPoint : myPoints) {
+            if (!myPoint.isButtonChoosen) {
+                myPoint.getButton().setText(String.valueOf(DiceUtility.CALCULATE(dices, myPoint.getScore_type())));
+            }
+        }
+
         revalidate();
     }//GEN-LAST:event_rollActionPerformed
 
     private void threeKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind1ActionPerformed
-        threeKind1.setEnabled(false);
+       
     }//GEN-LAST:event_threeKind1ActionPerformed
 
     private void threeKind2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind2ActionPerformed
-        threeKind2.setEnabled(false);
+       
     }//GEN-LAST:event_threeKind2ActionPerformed
 
     private void fourKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourKind1ActionPerformed
-        fourKind1.setEnabled(false);
+       
     }//GEN-LAST:event_fourKind1ActionPerformed
 
     private void fourKind2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourKind2ActionPerformed
-        fourKind2.setEnabled(false);
+        
     }//GEN-LAST:event_fourKind2ActionPerformed
 
     private void full1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_full1ActionPerformed
-        full1.setEnabled(false);
+       
     }//GEN-LAST:event_full1ActionPerformed
 
     private void full2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_full2ActionPerformed
-        full2.setEnabled(false);
+        
     }//GEN-LAST:event_full2ActionPerformed
 
     private void smallS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallS1ActionPerformed
-        smallS1.setEnabled(false);
+       
     }//GEN-LAST:event_smallS1ActionPerformed
 
     private void smallS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallS2ActionPerformed
-        smallS2.setEnabled(false);
+       
     }//GEN-LAST:event_smallS2ActionPerformed
 
     private void largeS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeS1ActionPerformed
-        largeS1.setEnabled(false);
+       
     }//GEN-LAST:event_largeS1ActionPerformed
 
     private void largeS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeS2ActionPerformed
-        largeS2.setEnabled(false);
+       
     }//GEN-LAST:event_largeS2ActionPerformed
 
     private void chance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chance1ActionPerformed
-        chance1.setEnabled(false);
+      
     }//GEN-LAST:event_chance1ActionPerformed
 
     private void chance2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chance2ActionPerformed
-        chance2.setEnabled(false);
+        
     }//GEN-LAST:event_chance2ActionPerformed
 
     private void yahtzee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzee1ActionPerformed
-        yahtzee1.setEnabled(false);
+        
     }//GEN-LAST:event_yahtzee1ActionPerformed
 
     private void yahtzee2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzee2ActionPerformed
-        yahtzee2.setEnabled(false);
+        
     }//GEN-LAST:event_yahtzee2ActionPerformed
 
     private void h1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h1ActionPerformed
@@ -800,8 +890,8 @@ public class GameScene extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Sixes;
-    private javax.swing.JLabel Sixes3;
-    private javax.swing.JLabel bonusPlayer1;
+    private javax.swing.JLabel bonus;
+    private javax.swing.JLabel bonusPlayer01;
     private javax.swing.JLabel bonusPlayer2;
     private javax.swing.JButton chance1;
     private javax.swing.JButton chance2;
@@ -848,8 +938,8 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JButton smallS1;
     private javax.swing.JButton smallS2;
     private javax.swing.JLabel sum;
-    private javax.swing.JLabel sumPlayer2;
-    private javax.swing.JLabel sumPlayer3;
+    private javax.swing.JLabel sumPlayer01;
+    private javax.swing.JLabel sumPlayer02;
     private javax.swing.JLabel threeKind;
     private javax.swing.JButton threeKind1;
     private javax.swing.JButton threeKind2;
