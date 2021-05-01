@@ -1,6 +1,7 @@
 package Client;
 
 import Message.Message;
+import Message.ScoreMessage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,7 +27,7 @@ public class Client {
             Client.sInput = new ObjectInputStream(Client.socket.getInputStream());
             Client.sOutput = new ObjectOutputStream(Client.socket.getOutputStream());
             Client.listen.start();
-            
+
             Message msg = new Message(Message.Message_Type.Name);
             msg.content = Login.nameTxt.getText();
             Client.Send(msg);
@@ -35,7 +36,7 @@ public class Client {
         }
     }
 
-    public static void  Stop() {
+    public static void Stop() {
         try {
             if (Client.socket != null) {
                 Client.listen.stop();
@@ -52,8 +53,8 @@ public class Client {
     public static void Display(String message) {
         System.out.println(message);
     }
-    
-    public static void  Send(Message msg) {
+
+    public static void Send(Message msg) {
         try {
             Client.sOutput.writeObject(msg);
         } catch (IOException ex) {
@@ -73,24 +74,32 @@ class ListenThread extends Thread {
                 switch (msg.type) {
                     case Name:
                         break;
-                    case RivalRequest:
-                        break;
                     case RivalConnected:
-                        String rivalName = (String)msg.content;
+                        String rivalName = (String) msg.content;
                         Client.isPaired = true;
                         Login.control.setText("Eslestirildi...........");
                         Login.gs.player1.setText("You");
-                        Login.gs.player2.setText(rivalName);      
+                        Login.gs.player2.setText(rivalName);
                         Login.gs.setVisible(true);
                         break;
                     case Disconnect:
                         break;
                     case GameControl:
                         Login.gs.roundControl = (int) msg.content;
-                        if((int)msg.content == 1)
+                        System.out.println((int) msg.content);
+                        if ((int) msg.content == 1) {
                             Login.gs.changeTurn(true);
+                        } else if ((int) msg.content == 0) {
+                            Login.gs.changeTurn(false);
+                        }
                         break;
-                    case Dice:
+                    case ChangeTurn:
+                        System.out.println("change turnnnn girdim");
+                        ScoreMessage score = (ScoreMessage) msg.content;
+                        Login.gs.getRivalButtonByGivenType(score.score_type).setText(String.valueOf(score.content));
+                        Login.gs.roundControl = 1;
+                        Login.gs.changeTurn(true);
+                        break;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ListenThread.class.getName()).log(Level.SEVERE, null, ex);
