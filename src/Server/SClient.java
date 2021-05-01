@@ -69,9 +69,9 @@ public class SClient {
                             sclient.name = msg.content.toString();
                             sclient.pairThread.start();
                             break;
-                        case Disconnect:
-                            break;
-                        case RivalRequest:
+                        case ChangeTurn:
+                            sclient.rival.Send(msg);
+                            System.out.println("mesah yolladımmmm");
                             break;
                         case ROLL:
                             Server.Send(sclient.rival, msg);
