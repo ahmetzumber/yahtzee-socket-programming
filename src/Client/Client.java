@@ -75,6 +75,7 @@ class ListenThread extends Thread {
                     case Name:
                         break;
                     case RivalConnected:
+                        System.out.println("Rival Connected girdim....");
                         String rivalName = (String) msg.content;
                         Client.isPaired = true;
                         Login.control.setText("Eslestirildi...........");
@@ -82,9 +83,8 @@ class ListenThread extends Thread {
                         Login.gs.player2.setText(rivalName);
                         Login.gs.setVisible(true);
                         break;
-                    case Disconnect:
-                        break;
                     case GameControl:
+                        System.out.println("GameControl girdimm....");
                         Login.gs.roundControl = (int) msg.content;
                         System.out.println((int) msg.content);
                         if ((int) msg.content == 1) {
@@ -93,12 +93,16 @@ class ListenThread extends Thread {
                             Login.gs.changeTurn(false);
                         }
                         break;
-                    case ChangeTurn:
+                    case CHANGE:
                         System.out.println("change turnnnn girdim");
                         ScoreMessage score = (ScoreMessage) msg.content;
                         Login.gs.getRivalButtonByGivenType(score.score_type).setText(String.valueOf(score.content));
                         Login.gs.roundControl = 1;
                         Login.gs.changeTurn(true);
+                        break;
+                    case FINISH:
+                        Login.gs.finishState = true;
+                        Login.gs.totalPlayer2.setText((String) msg.content);
                         break;
                 }
             } catch (IOException ex) {
