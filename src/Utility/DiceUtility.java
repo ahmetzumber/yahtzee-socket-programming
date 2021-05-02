@@ -14,7 +14,6 @@ import Message.ScoreMessage.Scores;
  */
 public class DiceUtility {
 
-    // Three of a kind and four of a kind should be modified
     public static int CALCULATE(Dice dices[], Scores score_type) {
         int score = 0;
         switch (score_type) {

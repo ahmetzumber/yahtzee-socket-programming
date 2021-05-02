@@ -65,31 +65,26 @@ public class SClient {
                     Message msg = (Message) sclient.sInput.readObject();
                     switch (msg.type) {
                         case Name:
-                            wantToPair = true;
                             sclient.name = msg.content.toString();
                             sclient.pairThread.start();
                             break;
-                        case ChangeTurn:
+                        case CHANGE:
                             sclient.rival.Send(msg);
-                            System.out.println("mesah yolladımmmm");
-                            break;
-                        case ROLL:
-                            Server.Send(sclient.rival, msg);
+                            System.out.println("Ben sclientim mesajı yolladımmmm");
                             break;
                         case GameControl:
                             Server.Send(sclient.rival, msg);
                             break;
-                        case Dice:
-                            Server.Send(sclient.rival, msg);
-                            break;
-                        case PNTSELECT:
+                        case FINISH:
                             Server.Send(sclient.rival, msg);
                             break;
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(Listen.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Listen Thread Exceptionnn");
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Listen.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Class Not Foundddd");
+                }catch(IllegalThreadStateException te){
+                    System.out.println("Illegal Threaddd");
                 }
             }
         }
@@ -106,7 +101,7 @@ public class SClient {
 
         @Override
         public void run() {
-            while (this.sclient.paired == false && this.sclient.socket.isConnected() && SClient.wantToPair == true) {
+            while (this.sclient.paired == false && this.sclient.socket.isConnected()) {
                 try {
                     //lock mekanizması
                     //sadece bir client içeri grebilir
@@ -118,7 +113,7 @@ public class SClient {
                         SClient selectedPair = null;
                         while (selectedPair == null && this.sclient.socket.isConnected()) {
                             for (SClient client : Server.sclients) {
-                                if (sclient != client && client.rival == null && client.wantToPair == true) {
+                                if (sclient != client && client.rival == null) {
                                     selectedPair = client;
                                     selectedPair.paired = true;
                                     selectedPair.rival = sclient;
@@ -142,8 +137,7 @@ public class SClient {
                                     Message msg4 = new Message(Message.Message_Type.GameControl);
                                     int b = 1;
                                     msg4.content = b;
-                                    Server.Send(sclient.rival, msg4);
-
+                                    Server.Send(sclient.rival, msg4);                               
                                     break;
                                 }
                             }
@@ -155,7 +149,9 @@ public class SClient {
                     //bırakılmazsa deadlock olur.
                     Server.pairingSemp.release(1);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(PairingThread.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Pairing Thread Exceptionnnn");
+                }catch(IllegalThreadStateException te){
+                    System.out.println("Pairing ThIllegal Threaddd");
                 }
             }
         }
