@@ -12,6 +12,7 @@ import Message.ScoreMessage.Scores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -21,14 +22,12 @@ import javax.swing.JToggleButton;
 public class GameScene extends javax.swing.JFrame {
 
     public static GameScene thisGame;
-    public static Thread tmr_slider;
-    public int gameState = 0;      // game state 1 ise 
-    public int roundControl;   // kimin baslayacagının controlü (1 olan baslar)
-    public int myRoundNum = 0, rivalRoundNum = 0;
+    public boolean finishState = false;
+    // kimin baslayacagının controlü (1 olan baslar)
+    public int roundControl;
     public static ArrayList<Score> myPoints;
     public static ArrayList<Score> rivalPoints;
     public static ArrayList<JToggleButton> activeButtons;
-    
 
     Dice dices[] = new Dice[5];
     int rollCount = 0;
@@ -49,49 +48,31 @@ public class GameScene extends javax.swing.JFrame {
         dices[3] = new Dice(dice04lbl, 4);
         dices[4] = new Dice(dice05lbl, 5);
 
-        tmr_slider = new Thread(() -> {
-            //soket bağlıysa dönsün
-            while (Client.socket.isConnected()) {
-                try {
-                    // oyun aktif ise
-                    if (gameState == 1) {
-                        //Client.Display("ben:" + myRoundNum + " - rival:" + rivalRoundNum + "\n Oyun Bitti:");
-                        if (myRoundNum == 13 && rivalRoundNum == 13) {
-                            // Totalde iki taraf da 13 tur oynadıktan sonra oyun tamamlanır.
-                            Thread.sleep(10);
-                            Thread.sleep(10);
-                            changeTurn(false);
-                            Thread.sleep(2);
-                            gameState = 0;
-                            // gameState 0 olduğunda artık oyun döngüsü bitmiş oluyor ve else koşuluna düşüyor.
-                        }
-                    } else {
-                        // Oyun durumu değiştikten sonra client durur.
-                        Thread.sleep(4000);
-                        Client.Stop();
-                        tmr_slider.stop();
-                        Thread.sleep(7000);
-
-                    }
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(GameScene.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
         revalidate();
     }
-    
-    public JButton getRivalButtonByGivenType(Scores score_type){
-        // Verilen score türüne göre rakibin butonuna erişmek için
-        for (Score rivalPoint : rivalPoints) 
-            if (rivalPoint.getScore_type() == score_type) 
-                return rivalPoint.getButton(); 
+
+    public Score getMyButtonByGivenType(Scores score_type) {
+        // Verilen score türüne göre score objemi döndür
+        for (Score myPoint : myPoints) {
+            if (myPoint.getScore_type() == score_type) {
+                return myPoint;
+            }
+        }
         return null;
     }
-    
+
+    public JButton getRivalButtonByGivenType(Scores score_type) {
+        // Verilen score türüne göre rakibin butonuna erişmek için
+        for (Score rivalPoint : rivalPoints) {
+            if (rivalPoint.getScore_type() == score_type) {
+                return rivalPoint.getButton();
+            }
+        }
+        return null;
+    }
+
     public void initScores() {
-        
+
         // player 1 score
         myPoints.add(new Score(Scores.ONES, onesValue1));
         myPoints.add(new Score(Scores.TWOS, twosValue1));
@@ -106,7 +87,7 @@ public class GameScene extends javax.swing.JFrame {
         myPoints.add(new Score(Scores.LARGESTR, largeS1));
         myPoints.add(new Score(Scores.CHANCE, chance1));
         myPoints.add(new Score(Scores.YAHTZEE, yahtzee1));
-        
+
         // player 2 scores
         rivalPoints.add(new Score(Scores.ONES, onesValue2));
         rivalPoints.add(new Score(Scores.TWOS, twosValue2));
@@ -121,28 +102,39 @@ public class GameScene extends javax.swing.JFrame {
         rivalPoints.add(new Score(Scores.LARGESTR, largeS2));
         rivalPoints.add(new Score(Scores.CHANCE, chance2));
         rivalPoints.add(new Score(Scores.YAHTZEE, yahtzee2));
-        
+
         activeButtons.add(h1);
         activeButtons.add(h2);
         activeButtons.add(h3);
         activeButtons.add(h4);
         activeButtons.add(h5);
-        
+
         addEventListenerToButtons();
     }
 
     public void changeTurn(boolean control) {
-        
+
         // Benim sıramda iken clientın erişimi engellenir
         roll.setEnabled(control);
-        
-        for (JToggleButton activeButton : activeButtons) 
+
+        for (JToggleButton activeButton : activeButtons) {
             activeButton.setEnabled(control);
+        }
+
+        // Zarların aktifligini tur degisimlerinde kontrol et
+        for (Dice dice : dices) {
+            dice.getLabel().setEnabled(control);
+            if (dice.getLabel().isEnabled()) {
+                dice.shuffle();
+            }
+        }
 
         // player1 buttons
-        for (Score myPoint : myPoints) 
-            if(!myPoint.isButtonChoosen)
-                myPoint.getButton().setEnabled(control);       
+        for (Score myPoint : myPoints) {
+            if (!myPoint.isButtonChoosen) {
+                myPoint.getButton().setEnabled(control);
+            }
+        }
     }
 
     public void disableRivalButtons(boolean control) {
@@ -175,20 +167,22 @@ public class GameScene extends javax.swing.JFrame {
                             myPoint.getButton().setText("0");
                             score.content = 0;
                         }
-                        roundControl = 0;   
+                        roundControl = 0;
                         myPoint.isButtonChoosen = true;
-                        Message msg = new Message(Message.Message_Type.ChangeTurn);
+                        Message msg = new Message(Message.Message_Type.CHANGE);
                         msg.content = score;
+                        System.out.println("msg.content = " + msg.content);
                         Client.Send(msg);
                         System.out.println("mesajı yolladımmmmm");
+                        bonusANDsumControl();
                         disableButtons();
                     }
                 }
             });
         }
     }
-    
-    public void disableButtons(){
+
+    public void disableButtons() {
         for (Score myPoint : myPoints) {
             if (!myPoint.isButtonChoosen) {
                 myPoint.getButton().setText("-");
@@ -196,10 +190,88 @@ public class GameScene extends javax.swing.JFrame {
             myPoint.getButton().setEnabled(false);
         }
         roll.setEnabled(false);
-        for (JToggleButton activeButton : activeButtons) 
+        for (JToggleButton activeButton : activeButtons) {
             activeButton.setEnabled(false);
+        }
     }
 
+    public void bonusANDsumControl() {
+        int bonusResult = 0;
+        int sumResult = 0;
+        int total = 0;
+        if (getMyButtonByGivenType(Scores.ONES).isButtonChoosen
+                && getMyButtonByGivenType(Scores.TWOS).isButtonChoosen
+                && getMyButtonByGivenType(Scores.THREES).isButtonChoosen
+                && getMyButtonByGivenType(Scores.FOURS).isButtonChoosen
+                && getMyButtonByGivenType(Scores.FIVES).isButtonChoosen
+                && getMyButtonByGivenType(Scores.SIXES).isButtonChoosen) {
+
+            bonusResult += Integer.parseInt(getMyButtonByGivenType(Scores.ONES).getButton().getText());
+            bonusResult += Integer.parseInt(getMyButtonByGivenType(Scores.TWOS).getButton().getText());
+            bonusResult += Integer.parseInt(getMyButtonByGivenType(Scores.THREES).getButton().getText());
+            bonusResult += Integer.parseInt(getMyButtonByGivenType(Scores.FOURS).getButton().getText());
+            bonusResult += Integer.parseInt(getMyButtonByGivenType(Scores.FIVES).getButton().getText());
+            bonusResult += Integer.parseInt(getMyButtonByGivenType(Scores.SIXES).getButton().getText());
+
+            if (bonusResult >= 63) {
+                sumResult = bonusResult + 35;
+                bonusPlayer01.setText("35");
+                sumPlayer01.setText(String.valueOf(sumResult));
+            } else {
+                sumResult = bonusResult;
+                bonusPlayer01.setText("0");
+                sumPlayer01.setText(String.valueOf(sumResult));
+            }
+            // TOTAL SCORE CONTROLS 
+            if (getMyButtonByGivenType(Scores.THREEKIND).isButtonChoosen
+                    && getMyButtonByGivenType(Scores.FOURKIND).isButtonChoosen
+                    && getMyButtonByGivenType(Scores.FULLHOUSE).isButtonChoosen
+                    && getMyButtonByGivenType(Scores.SMALLSTR).isButtonChoosen
+                    && getMyButtonByGivenType(Scores.LARGESTR).isButtonChoosen
+                    && getMyButtonByGivenType(Scores.CHANCE).isButtonChoosen
+                    && getMyButtonByGivenType(Scores.YAHTZEE).isButtonChoosen) {
+
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.THREEKIND).getButton().getText());
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.FOURKIND).getButton().getText());
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.FULLHOUSE).getButton().getText());
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.SMALLSTR).getButton().getText());
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.LARGESTR).getButton().getText());
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.CHANCE).getButton().getText());
+                total += Integer.parseInt(getMyButtonByGivenType(Scores.YAHTZEE).getButton().getText());
+
+                // Total score hesaplandıktan sonra cliente mesaj olarak gönder
+                total += sumResult;
+                totalPlayer1.setText(String.valueOf(total));
+                Message finishMsg = new Message(Message.Message_Type.FINISH);
+                finishMsg.content = totalPlayer1.getText();
+                Client.Send(finishMsg);
+                
+                if (finishState) {
+                    int player2Total = Integer.parseInt(totalPlayer2.getText());
+                    String finishStr = "";
+                    
+                    if(total > player2Total){
+                        finishStr = "You winn !! Score: "+total;
+                        JOptionPane.showMessageDialog(this,finishStr);
+                    }else if(player2Total > total){
+                        finishStr = "Your rival winn :( Rival Score: "+player2Total;
+                        JOptionPane.showMessageDialog(this,finishStr);
+                    }
+                }
+
+            }
+        }
+    }
+
+    public int rivalScores(){
+        int score = 0;
+        for (Score rivalPoint : rivalPoints) {
+            score += Integer.parseInt(rivalPoint.getButton().getText());
+        }
+        score += Integer.parseInt(sumPlayer02.getText());
+        return score;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -683,10 +755,9 @@ public class GameScene extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void onesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue1ActionPerformed
 
-        
+
     }//GEN-LAST:event_onesValue1ActionPerformed
 
     private void onesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onesValue2ActionPerformed
@@ -702,35 +773,35 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_twosValue2ActionPerformed
 
     private void threesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesValue1ActionPerformed
-        
+
     }//GEN-LAST:event_threesValue1ActionPerformed
 
     private void threesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threesValue2ActionPerformed
-     
+
     }//GEN-LAST:event_threesValue2ActionPerformed
 
     private void foursValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursValue1ActionPerformed
-       
+
     }//GEN-LAST:event_foursValue1ActionPerformed
 
     private void foursValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foursValue2ActionPerformed
-       
+
     }//GEN-LAST:event_foursValue2ActionPerformed
 
     private void fivesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesValue1ActionPerformed
-       
+
     }//GEN-LAST:event_fivesValue1ActionPerformed
 
     private void fivesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fivesValue2ActionPerformed
-      
+
     }//GEN-LAST:event_fivesValue2ActionPerformed
 
     private void sixesValue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesValue1ActionPerformed
-       
+
     }//GEN-LAST:event_sixesValue1ActionPerformed
 
     private void sixesValue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixesValue2ActionPerformed
-       
+
     }//GEN-LAST:event_sixesValue2ActionPerformed
 
     private void rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollActionPerformed
@@ -746,6 +817,7 @@ public class GameScene extends javax.swing.JFrame {
                 d.shuffle();
             }
         }
+
         // dünyanın en güzel kodu
         for (Score myPoint : myPoints) {
             if (!myPoint.isButtonChoosen) {
@@ -757,59 +829,59 @@ public class GameScene extends javax.swing.JFrame {
     }//GEN-LAST:event_rollActionPerformed
 
     private void threeKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind1ActionPerformed
-       
+
     }//GEN-LAST:event_threeKind1ActionPerformed
 
     private void threeKind2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeKind2ActionPerformed
-       
+
     }//GEN-LAST:event_threeKind2ActionPerformed
 
     private void fourKind1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourKind1ActionPerformed
-       
+
     }//GEN-LAST:event_fourKind1ActionPerformed
 
     private void fourKind2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourKind2ActionPerformed
-        
+
     }//GEN-LAST:event_fourKind2ActionPerformed
 
     private void full1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_full1ActionPerformed
-       
+
     }//GEN-LAST:event_full1ActionPerformed
 
     private void full2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_full2ActionPerformed
-        
+
     }//GEN-LAST:event_full2ActionPerformed
 
     private void smallS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallS1ActionPerformed
-       
+
     }//GEN-LAST:event_smallS1ActionPerformed
 
     private void smallS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallS2ActionPerformed
-       
+
     }//GEN-LAST:event_smallS2ActionPerformed
 
     private void largeS1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeS1ActionPerformed
-       
+
     }//GEN-LAST:event_largeS1ActionPerformed
 
     private void largeS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeS2ActionPerformed
-       
+
     }//GEN-LAST:event_largeS2ActionPerformed
 
     private void chance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chance1ActionPerformed
-      
+
     }//GEN-LAST:event_chance1ActionPerformed
 
     private void chance2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chance2ActionPerformed
-        
+
     }//GEN-LAST:event_chance2ActionPerformed
 
     private void yahtzee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzee1ActionPerformed
-        
+
     }//GEN-LAST:event_yahtzee1ActionPerformed
 
     private void yahtzee2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yahtzee2ActionPerformed
-        
+
     }//GEN-LAST:event_yahtzee2ActionPerformed
 
     private void h1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_h1ActionPerformed
@@ -947,8 +1019,8 @@ public class GameScene extends javax.swing.JFrame {
     private javax.swing.JButton threesValue1;
     private javax.swing.JButton threesValue2;
     private javax.swing.JLabel total;
-    private javax.swing.JLabel totalPlayer1;
-    private javax.swing.JLabel totalPlayer2;
+    public javax.swing.JLabel totalPlayer1;
+    public javax.swing.JLabel totalPlayer2;
     private javax.swing.JLabel twos;
     private javax.swing.JButton twosValue1;
     private javax.swing.JButton twosValue2;
