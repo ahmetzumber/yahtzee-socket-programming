@@ -40,7 +40,7 @@ public class GameScene extends javax.swing.JFrame {
         thisGame = this;
         initScores();
         disableRivalButtons(false);
-        jPanel2.setBackground(Color.decode("#845ec2"));
+        jPanel2.setBackground(Color.decode("#a0937d"));
         jPanel2.setSize(1190, 1015);
         dices[0] = new Dice(dice01lbl, 1);
         dices[1] = new Dice(dice02lbl, 2);

@@ -13,7 +13,6 @@ public class SClient {
 
     int clientID;
     Socket socket;
-    public static boolean wantToPair = false;
     public String name = "NoName";
     ObjectOutputStream sOutput;
     ObjectInputStream sInput;
